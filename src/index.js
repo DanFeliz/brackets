@@ -5,20 +5,23 @@ module.exports = function check(str, bracketsConfig) {
     openBrack.push(el1[0]);
     brackPair.[el1[1]] = el1[0];
   });
-  
+
   let stack = [];
   
   for (let i = 0; i < str.length; i++) {
     
     let currentSymbol = str[i];
+    let topElement = stack[stack.length - 1];
     
-    if (openBrack.includes(currentSymbol)) {
+    if (stack.length !== 0 && brackPair[currentSymbol] === topElement) {
+      stack.pop();
+    } else if (openBrack.includes(currentSymbol)) {
         stack.push(currentSymbol);
     } 
     else 
     {
         if (stack.length === 0) return false;
-        let topElement = stack[stack.length - 1];
+        
         if (brackPair[currentSymbol] === topElement) {       
           stack.pop();
         } 
@@ -27,6 +30,6 @@ module.exports = function check(str, bracketsConfig) {
         }
    }
   }
-   
+  
   return stack.length === 0;
 }
