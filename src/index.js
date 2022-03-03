@@ -3,7 +3,7 @@ module.exports = function check(str, bracketsConfig) {
   const brackPair = {};
   bracketsConfig.forEach(el1 => {
     openBrack.push(el1[0]);
-    brackPair.[el1[1]] = el1[0];
+    brackPair[el1[1]] = el1[0];
   });
 
   let stack = [];
